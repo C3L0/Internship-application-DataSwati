@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:8
+    container_name: dataswati_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ""  # Set the root password here
+      MYSQL_DATABASE: dataswati_test       # Optional: Set a default database
+    ports:
+      - "3307:3306"
+    volumes:
+      - scripts_mysql_data:/var/lib/mysql
+    networks:
+      - scripts_network
+
+  api:
+    build: .
+    container_name: dataswati_api
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    networks:
+      - scripts_network
+    environment:
+      - DATABASE_URL=mysql://root:@db:3306/dataswati_test # Adjust with the correct root password
+
+networks:
+  scripts_network:
+    driver: bridge  # Ensure this network is defined here
+
+volumes:
+  scripts_mysql_data:

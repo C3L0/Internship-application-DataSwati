@@ -1,0 +1,19 @@
+ID,Date,Produit,Prix,Quantite,Categorie,Vendeur,Remise,PrixReel
+1,2023-09-15 00:00:00,Ordinateur,1200,2,Informatique,2,10.0,2160.0
+2,2023-09-15 00:00:00,Souris,25,5,Accessoires,1,0.0,125.0
+3,2023-09-19 00:00:00,Clavier mécanique,70,3,Informatique,2,5.0,199.5
+4,2023-09-18 00:00:00,Écran 24 pouces,180,4,Informatique,1,15.0,612.0
+5,2023-09-19 00:00:00,Casque audio,120,1,Accessoires,3,nan,nan
+6,2023-09-28 00:00:00,Imprimante laser,250,1,Informatique,2,20.0,200.0
+7,2023-09-21 00:00:00,Webcam HD,60,6,<NA>,1,5.0,342.0
+8,2023-09-22 00:00:00,Station de charge,45,3,Accessoires,3,0.0,135.0
+9,2023-09-22 00:00:00,Sac à dos pour ordinateur,80,2,Accessoires,2,10.0,144.0
+10,2023-09-24 00:00:00,Tablette 10 pouces,300,1,Informatique,3,25.0,225.0
+11,2023-09-25 00:00:00,Clé USB 64Go,15,10,Accessoires,1,0.0,150.0
+16,2023-09-30 00:00:00,Enceintes Bluetooth,150,2,Accessoires,3,15.0,255.0
+12,2023-09-26 00:00:00,Disque dur externe 1To,100,2,Informatique,2,nan,nan
+13,2023-09-27 00:00:00,Chargeur universel,35,4,Accessoires,3,0.0,140.0
+14,2023-09-24 00:00:00,Carte graphique,450,1,Informatique,1,50.0,225.0
+15,2023-09-29 00:00:00,Souris ergonomique,60,3,Accessoires,2,5.0,171.0
+17,2023-10-01 00:00:00,Tablette graphique,200,1,Informatique,1,20.0,160.0
+18,2023-10-02 00:00:00,Ordinateur portable,1400,1,Informatique,3,30.0,980.0

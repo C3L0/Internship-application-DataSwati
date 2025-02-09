@@ -1,0 +1,23 @@
+ID,Date,Produit,Prix,Quantité,Catégorie,Vendeur,Remise
+1,2023-09-15,Ordinateur,1200,2,Informatique,002,10
+2,2023-09-15,Souris,25,5,Accessoires,001,0
+3,2023-09-19,Clavier mécanique,70,3,Informatique,002,5
+4,2023-09-18,Écran 24 pouces,180,4,Informatique,001,15
+5,2023-09-19,Casque audio,120,1,Accessoires,003,
+6,2023-09-28,Imprimante laser,250,1,Informatique,002,20
+7,2023-09-21,Webcam HD,60,6,,001,5
+8,2023-09-22,Station de charge,45,3,Accessoires,003,0
+9,2023-09-22,Sac à dos pour ordinateur,80,2,Accessoires,002,10
+10,2023-09-24,Tablette 10 pouces,300,1,Informatique,003,25
+11,2023-09-25,Clé USB 64Go,15,10,Accessoires,001,0
+16,2023-09-30,Enceintes Bluetooth,150,2,Accessoires,003,15
+12,2023-09-26,Disque dur externe 1To,100,2,Informatique,002,
+13,2023-09-27,Chargeur universel,35,4,Accessoires,003,0
+14,2023-09-24,Carte graphique,450,1,Informatique,001,50
+15,2023-09-29,Souris ergonomique,60,3,Accessoires,002,5
+16,2023-09-30,Enceintes Bluetooth,150,2,Accessoires,003,15
+17,2023-10-01,Tablette graphique,200,1,Informatique,001,20
+18,2023-10-02,Ordinateur portable,1400,1,Informatique,003,30
+8,2023-09-22,Station de charge,45,3,Accessoires,003,0
+14,2023-09-24,Carte graphique,450,1,Informatique,001,50
+11,2023-09-25,Clé USB 64Go,15,10,Accessoires,,0
