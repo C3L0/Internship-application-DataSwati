@@ -21,12 +21,12 @@ def test_get_sale(sale_id):
     print(response.json())
 
 def test_get_sale_per_categorie(sale_categorie):
-    response = requests.get(f"http://127.0.0.1:5000/sales_categorie/{sale_categorie}")
+    response = requests.get(f"http://127.0.0.1:5000/sales_categorie/{sale_categorie}?selected_columns={'ID, Date, Product'}")
     assert response.status_code == 200
     print(response.json())
 
 def test_sales_in_date_range(start_date, end_date):
-    response = requests.get(f"http://127.0.0.1:5000/sales_in_date_range?start_date={start_date}&end_date={end_date}")
+    response = requests.get(f"http://127.0.0.1:5000/sales_in_date_range?start_date={start_date}&end_date={end_date}?selected_columns={'ID, Date, Product, Vendeur'}")
     assert response.status_code == 200
     print(response.json())
 
