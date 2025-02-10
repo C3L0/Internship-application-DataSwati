@@ -1,65 +1,100 @@
-# Contexte
-Vous êtes data-engineer dans une équipe tech.
-Vous êtes chargés de développer un script d'ingestion et une **API REST**.
+# Fichiers présents dans le projet
+- database_creation.ipynb
+- main.py
+- test_serveur.py
+- Dockerfile
+- Docker-compose.yml
+   
+- data/
+-   employees.csv
+-   sales.csv
+-   employees_clean.csv
+-   sales_clean.csv 
 
-Le script d'ingestion a pour but d'ingérer des fichiers csv en base de données. 
-L'API REST a pour but d'ingérer des nouvelles données, d'extraire des données existantes et de fournir des statistiques.
 
-
-# Données
-
-### Fichier **`sales.csv`** :
-- `ID` : Identifiant unique de la transaction.
-- `Date` : Date de la vente.
-- `Produit` : Nom du produit vendu.
-- `Prix` : Prix unitaire du produit.
-- `Quantité` : Quantité d'unités vendues.
-- `Catégorie` : Catégorie du produit (Informatique, Accessoires, etc.).
-- `Remise` : Pourcentage de réduction appliqué sur la transaction.
-- `Vendeur` : Identifiant du vendeur ayant effectué la transaction.
-
-### Fichier **`employees.csv`** :
-- `ID` : Identifiant unique du vendeur.
-- `Nom` : Nom du vendeur.
-- `Équipe` : Équipe à laquelle appartient le vendeur.
-
-# Étapes à réaliser
-
+# Étapes réalisées
 ## 1. Ingérer les données
-- Enregistrer les données des fichiers CSV dans une **base de données** de votre choix (PostgreSQL, MySQL, MongoDB, etc.).
-- Le modèle de données doit être conçu de manière à faciliter l'exploitation des informations.
-- Les lignes duppliquées doivent être ignorées.
-- Les lignes contenant des valeurs manquantes doivent être quand même importées.
-- Ajouter une colonne calculée : **PrixRéel** qui correspond à `Prix * Quantité`, en déduisant le pourcentage de remise.
+- Tout a été réalisé.
+Voir dans le fichier database_creation.ipynb. Ce fichier prend en entrée les fichiers csv de data (fourni dans le gitlab) pour les traiter.
+J'ai fait le choix de faire une **base de données** sur MySQL que j'ai appelé 'dataswati_test'. J'ai fait ce choix, car l'importation de fichier csv sur MySQL est facile et que c'est un système de gestion de database avec lequel je suis particulièrement familier.
+Pour l'exploitation des données, j'ai utilisé la library 'pandas', j'ai supprimé les doublons tout en conservant les lignes avec des valeurs manquantes et pour finir, j'ai ajouté une colonnes **PrixRéel**.
 
-**_NOTE:_** Le script doit être écrit python.
-
+**_NOTE:_** J'ai modifié le nom de certaines colonnes pour ne pas à avoir à travailler avec des accents (pour ne pas rencontrer de problème entre les normes UTF-8 et Ascii).
 
 ## 2. Créer une API avec FastAPI
-- L'API doit permettre aux utilisateurs de **téléverser un fichier CSV** pour ajouter de nouvelles données à la base de données. Les mêmes règles que pour l'ingestion initiale s'appliquent.
-- L'API doit offrir la possibilité de **consulter les données** sous forme de JSON avec des **filtres personnalisés**, tels que :
-  - Colonnes spécifiques à inclure dans la réponse.
-  - Intervalle de dates.
-  - Catégories de produits.
-- L'API doit inclure une route permettant de **consulter le chiffre d'affaires par jour et par vendeur**.
+- Tout a été réalisés
+Voir le fichier main.py. Ce fichier créé l'API avec FastAPI et fait le lien avec la database MySQL.
+Ce fichier permet de téléverser un fichier csv dans la database (dans la mesure où la database est déjà existante). Il applique seulement la règle de la suppression des doublons puisque toutes les autres contraintes étaient propre aux fichiers csv du projet.
+L'API permet notamment de:
+- trouver une vente(sales) ou un employé(employees) selon son ID
+- trouver les ventes(sales) selon une catégorie choisie pour le user et retourner seulement les colonnes selectionnées
+- trouver les ventes(sales) comprises entre deux dates et retourner seulement les colonnes sélectionnées
+- trouver le chiffre d'affaires journalier par vendeur
+- ajouter une seule vente
+- ajouter un fichier csv
+
+### Lien pour tester l'API (une fois lancée):
+http://127.0.0.1:8000/ <br>
+http://127.0.0.1:8000/employees/1 <br>
+http://127.0.0.1:8000/sales/1 <br>
+http://127.0.0.1:8000/sales_categorie/Informatique <br>
+http://127.0.0.1:8000/sales_in_date_range?start_date=2023-10-01&end_date=2023-10-31 <br>
+http://127.0.0.1:8000/sales_revenue_per_day_and_vendeur <br>
++++
+
+**_NOTE:_** J'ai ajouter un fichier de test unitaire pour vérifier que les fonctions implémentées fonctionnent correctement.
+**_NOTE:_** Les fonctions qui permettent de modifier la base de données 'ajouter une vente', 'ajouter un fichier csv' ne fonctionnent pas en utilisant une url sur internet (erreur 405) mais elles fonctionnent correctement avec les tests unitaires, elle modifie la database
 
 ## 3. Conteneuriser la solution
-- **Conteneuriser l'API** ainsi que la base de données en utilisant Docker. Le projet doit pouvoir être facilement déployé via **Docker Compose**.
+- Tout a été réalisés
+Voir les fichiers Dockerfile et Docker-compose.yml. Toutes les fonctionnalités citées dans l'étape 2 fonctionnent (mais on rencontre le même problème pour les modifications de la database via un url sur Internet.)
 
 ## 4. Rédiger une documentation
-- Rédiger une **documentation concise** expliquant comment déployer le projet et décrivant les principales fonctionnalités implémentées.
+- Tout a été réalisés
+Voir le README.md et les fichiers python sont commentés.
 
 ## 5. Bonus (optionnel)
-Vous êtes libre d'ajouter des fonctionnalités supplémentaires que vous jugez pertinentes. Voici quelques idées d'améliorations possibles :
-- Ajouter des **tests unitaires** pour valider les fonctionnalités de l'API.
-- Créer de nouvelles routes pour enrichir l'API (par exemple, pour récupérer des statistiques plus détaillées).
-- **Supporter d'autres types de fichiers** pour l'ingestion, comme JSON ou XML.
-- Mettre en place une **pipeline CI/CD** pour automatiser les tests et la construction de l'image.
-- Ajouter un système d'**authentification** pour sécuriser les accès à l'API.
+- Je n'ai réalisé que les tests unitaires en bonus
+
+# Mise en place du projet
+## Etape 1:
+#### Création d'une database MySQL: 'dataswati_test': <br>
+ - CREATE DATABASE dataswati_test; <br>
+#### Lancer le fichier database_creation.ipynb et exécuter toutes les cellules <br>
+####  Importer les fichiers csv dans la database: <br>
+ - Utiliser PhpMyAdmin ou alors via la console <br>
+
+## Etape 2
+#### Emplacement du fichier main.py: <br>
+ - project_dataswati/venv/Scripts/main.py<br>
+#### Emplacement du fichier des test unitaire:<br>
+ - project_dataswati/venv/Scripts/test_server.py<br>
+#### Prérequis pour lancer les fichiers:<br>
+#### main<br>
+#### dans le terminal - .../venv/Scripts:<br>
+#### pour activer l'environnement virtuel:<br>
+ - ./activate<br>
+#### Installer les libraries<br>
+ - pip install fastapi uvicorn mysql.connector pydantic requests<br>
+#### Lancer le serveur (le serveur se lancera en localhost: 127.0.0.1:8000):<br>
+ - uvicorn main:app --reload --port 8000<br>
+#### test_serveur<br>
+#### dans un autre terminal - ../venv/Scripts:<br>
+#### lancer les tests unitaires:<br>
+ - python test_serveur.py<br>
+#### Pour désactiver l'environnement virtuel:<br>
+ - ./deactivate<br>
+
+## Etape 3
+#### Dans le terminal - .../venv/Scripts:<br>
+ - docker-compose up --build<br>
+#### Lancer l'API - sur le browser:<br>
+ - localhost:8000<br>
+
+**_NOTE:_** Vérifier dans les fichiers Docker que les informations soit les bonnes particulièrement le nom de la database MySQL et les login à votre MySQL
+
+# Remarque
+J'ai apprécié sur ce projet, avec plus de temps, j'y aurais ajouté d'autres fonctionnalités: plus d'options dans l'API(delete & modify), j'aurais également aimé faire une API propre avec streamlit notamment.
+Pour les autres bonus, il m'aurait fallu me renseigner dessus pour pouvoir les réaliser.
 
 
-## Information
-
-- **Structuration du projet** : Le projet doit être bien organisé
-- **Qualité et lisibilité du code** : Le code doit être propre, lisible et respecter les bonnes pratiques de développement.
-- Le livrable doit être un lien vers GitHub, GitLab, ou une autre plateforme de gestion de code.
