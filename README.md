@@ -76,6 +76,8 @@ Voir le README.md et les fichiers python sont commentés.
  - ./activate<br>
 #### Installer les libraries<br>
  - pip install fastapi uvicorn mysql.connector pydantic requests<br>
+#### Veiller à ce que votre "config" dans le main ait bien:
+ - 'host': '127.0.0.1' décommenté et #'host': 'host.docker.internal' commenté
 #### Lancer le serveur (le serveur se lancera en localhost: 127.0.0.1:8000):<br>
  - uvicorn main:app --reload --port 8000<br>
 #### test_serveur<br>
@@ -86,6 +88,8 @@ Voir le README.md et les fichiers python sont commentés.
  - ./deactivate<br>
 
 ## Etape 3
+#### Veiller à ce que votre "config" dans le main ait bien:
+ - #'host': '127.0.0.1' commenté et 'host': 'host.docker.internal' décommenté
 #### Dans le terminal - .../venv/Scripts:<br>
  - docker-compose up --build<br>
 #### Lancer l'API - sur le browser:<br>
